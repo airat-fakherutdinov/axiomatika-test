@@ -1,0 +1,20 @@
+server:
+  port: ${APP_PORT:8080}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/${DB_NAME:axiomatika_test}
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    hikari:
+      schema: '${DB_SCHEMA:axiomatika_test_schema}'
+
+  liquibase:
+    change-log: db/changelog/db.changelog-master.xml
+    default-schema: ${spring.datasource.hikari.schema}
+
+  jpa:
+    properties:
+      hibernate:
+        default_schema: ${spring.datasource.hikari.schema}
